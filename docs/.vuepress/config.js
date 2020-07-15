@@ -1,5 +1,5 @@
 module.exports = {
-    base: '/',
+    base: '/gstarp-diary/',
     title: 'GstarP Diary',
     themeConfig: {
         repo: 'https://github.com/GStarP',
