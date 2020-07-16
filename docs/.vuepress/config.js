@@ -22,7 +22,7 @@ const baseConfig = {
     }
 }
 
-function autodir(config) {
+function autosidebar(config) {
     const articlePath = './docs/articles'
     const dirs = fs.readdirSync(articlePath, { withFileTypes: true })
  
@@ -33,10 +33,9 @@ function autodir(config) {
             let children = []
 
             const filenameList = fs.readdirSync(articlePath + '/' + title)
-            for (let filename of filenameList) {
+            for (let filename of filenameList)
                 if (filename !== 'README.md')
                     children.push(path + '/' + filename)
-            }
 
             config.themeConfig.sidebar.push({
                 title,
@@ -49,4 +48,4 @@ function autodir(config) {
     return config
 }
 
-module.exports = autodir(baseConfig)
+module.exports = autosidebar(baseConfig)
