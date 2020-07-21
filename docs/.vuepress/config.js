@@ -29,17 +29,17 @@ function autosidebar(config) {
     for (let dir of dirs) {
         if (dir.isDirectory()) {
             const title = dir.name
-            const path = '/articles/' + title
+            const relativePath = '/articles/' + title
             let children = []
 
             const filenameList = fs.readdirSync(articlePath + '/' + title)
             for (let filename of filenameList)
                 if (filename !== 'README.md')
-                    children.push(path + '/' + filename)
+                    children.push(relativePath + '/' + filename)
 
             config.themeConfig.sidebar.push({
                 title,
-                path,
+                path: relativePath,
                 children
             })
         }
@@ -47,5 +47,34 @@ function autosidebar(config) {
 
     return config
 }
+
+function autoArchieve() {
+    const articlePath = './docs/articles'
+    const dirs = fs.readdirSync(articlePath, { withFileTypes: true })
+ 
+    for (let dir of dirs) {
+        if (dir.isDirectory()) {
+            const path = articlePath + '/' + dir.name
+            const readme = path + '/README.md'
+            let readmeContent = `# ${dir.name}\n\n`
+
+            const relativePath = '/articles/' + dir.name
+
+            const filenameList = fs.readdirSync(articlePath + '/' + dir.name)
+            for (let filename of filenameList) {
+                if (filename !== 'README.md') {
+                    const content = fs.readFileSync(path + '/' + filename, { encoding: 'utf-8' })
+                    const firstLine = content.split('\n')[0]
+                    const title = firstLine.substr(2, firstLine.length - 3)
+                    readmeContent += `### [${title}](${relativePath}/${filename})\n\n`
+                }
+            }
+
+            fs.writeFileSync(readme, readmeContent, { flag: 'w' })
+        }
+    }
+}
+
+autoArchieve()
 
 module.exports = autosidebar(baseConfig)
