@@ -2,7 +2,7 @@
 home: true
 heroImage: vue.png
 heroText: GStarP Diary
-tagline: 埋藏梦想的地方，有没有花开成海洋
+tagline: 黑暗中，要记得抬头看星星
 actionText: 顺手看看
 actionLink: /articles/
 features:
