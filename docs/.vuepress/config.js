@@ -6,7 +6,7 @@ const fs = require('fs')
 
 const baseConfig = {
     base: '/gstarp-diary/',
-    title: 'GstarP Diary',
+    title: 'GStarP Diary',
     themeConfig: {
         repo: 'https://github.com/GStarP',
         repoLabel: 'GitHub',
