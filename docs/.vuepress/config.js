@@ -22,7 +22,7 @@ const baseConfig = {
     }
 }
 
-function autosidebar(config) {
+function autoSidebar(config) {
     const articlePath = './docs/articles'
     const dirs = fs.readdirSync(articlePath, { withFileTypes: true })
  
@@ -75,6 +75,10 @@ function autoArchieve() {
     }
 }
 
-autoArchieve()
+function preHandle(config) {
+    autoArchieve()
+    config = autoSidebar(baseConfig)
+    return config
+}
 
-module.exports = autosidebar(baseConfig)
+module.exports = preHandle(baseConfig)
