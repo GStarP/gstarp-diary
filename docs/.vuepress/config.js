@@ -33,9 +33,12 @@ function autoSidebar(config) {
             let children = []
 
             const filenameList = fs.readdirSync(articlePath + '/' + title)
-            for (let filename of filenameList)
+            for (let filename of filenameList) {
+                if (filename === 'imgs')
+                    continue;
                 if (filename !== 'README.md')
                     children.push(relativePath + '/' + filename)
+            }
 
             config.themeConfig.sidebar.push({
                 title,
@@ -62,6 +65,8 @@ function autoArchieve() {
 
             const filenameList = fs.readdirSync(articlePath + '/' + dir.name)
             for (let filename of filenameList) {
+                if (filename === 'imgs')
+                    continue;
                 if (filename !== 'README.md') {
                     const content = fs.readFileSync(path + '/' + filename, { encoding: 'utf-8' })
                     const firstLine = content.split('\n')[0]
